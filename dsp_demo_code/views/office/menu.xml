@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <!--     Office Menu      -->
+        <menuitem   id="office365_parent_menu" 
+                    name="Office365 Connector" groups="dsp_demo_code.group_office365_manager"
+					web_icon="dsp_demo_code,static/description/banner.png"/>					
+                <menuitem
+			name="Office365 Online Dashboard"
+			id="menu_office365_dashboard"
+			parent="office365_parent_menu"
+			action="action_office365_dashboard"
+			sequence="1"/>
+                <!-- <menuitem id="menu_office365_synchronization" 
+                        name="Synchronization" parent="dsp_demo_code.office365_parent_menu" 
+                        sequence="1" action="dsp_demo_code.office365_synchronization_action"/> -->
+                <menuitem id="menu_office365_parent_instance" 
+                        name="Office365 Instance" parent="dsp_demo_code.office365_parent_menu" sequence="10"/>
+                        <menuitem id="menu_office365_instance" 
+                                name="Instance" parent="dsp_demo_code.menu_office365_parent_instance"
+                                action="dsp_demo_code.office365_connection_mapping" sequence="10"/>
+                <menuitem id="menu_office365_mapping" 
+                        name="Mappings" parent="dsp_demo_code.office365_parent_menu" sequence="10"/>
+                        <menuitem id="menu_office365_contact_mapping" 
+                                name="Contact" parent="dsp_demo_code.menu_office365_mapping"
+                                action="dsp_demo_code.office365_contact_mapping" sequence="10"/>
+                        <menuitem id="menu_office365_calendar_mapping" 
+                                name="Calendar" parent="dsp_demo_code.menu_office365_mapping"
+                                action="dsp_demo_code.office365_calendar_mapping" sequence="20"/>
+                        <menuitem id="menu_office365_project_mapping" 
+                                name="Project" parent="dsp_demo_code.menu_office365_mapping"
+                                action="dsp_demo_code.office365_project_mapping" sequence="30"/>
+                        <menuitem id="menu_office365_task_mapping" 
+                                name="Task" parent="dsp_demo_code.menu_office365_mapping"
+                                action="dsp_demo_code.office365_task_mapping" sequence="40"/>
+    </data>
+</odoo>
+
