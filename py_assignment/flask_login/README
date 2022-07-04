@@ -1,0 +1,68 @@
+This is the flask project for authentication using flask_login library.
+
+requirements.
+1:- flask_login
+2:- flask_sqlalchemy
+
+After uploading the project in the flask server, delete the file db.sqlite
+
+set the project.
+-->set FLASK_APP=project
+
+Now go to flask_login path(directory of the project) and start python terminal.
+
+execute following commands.
+
+from project import db,create_app
+
+db.create_all(app=create_app())
+
+exit()
+
+Now start the flask server.
+-->flask run
+
+-->Now How to call api to check that it is working good?.
+
+import requests
+import json
+
+headers = {'Content-type':'application/json'}
+
+client = requests.session() #create session of the request
+
+url = 'http://localhost:5000/signup' 
+
+data =json.dumps({
+    'name':'deepak',
+    'password':'webkul',
+    'email':'deepak.gusain1310@gmail.com'
+})
+r = client.request('POST', url, data=data, headers=headers).content #singup using any details, I am using mine
+print(r)
+
+# update hall available
+url = 'http://localhost:5000/signin'
+
+data =json.dumps({
+    # 'name':'deepak',
+    'password':'webkul',
+    'email':'deepak.gusain1310@gmail.com'
+})
+r = client.request('POST', url, data=data, headers=headers).content #singin to logger so that we can set to login_user.
+print(r)
+# res = requests.post(url, data = data, headers = headers).content
+
+url = 'http://localhost:5000/profile'
+
+
+res = client.request('GET', url, data = {}, headers = headers).content #can check the user name without passing the info as session is still active
+
+
+print(res)
+
+url = 'http://localhost:5000/logout'
+r = client.request('GET', url, data={}, headers=headers).content # logout from the server
+print(r)
+
+Note:- All the apis should be call with one session because for every new client there will be another session.

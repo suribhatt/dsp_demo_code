@@ -1,0 +1,144 @@
+<---Python Assigment--->
+A python 3 api to perform hall,professor and hall activities.
+These instruction are written for rest api and this project is developed on flask.
+
+Requirements for the project.
+1:- mysql server details
+2:- database
+3:- mysql-connector-python library of python
+
+Configuration of the project.
+1:- config.json
+--> To access mysql client must need to config mysql parameter in config.json file.
+database configuration:-
+  host: mysql host
+  user: mysql user
+  password: user password
+  database: database name.
+
+session configuration:-
+-->developer can set any session_key, which will be use for further api activities
+
+
+install tables on database.
+-->run install.py file to create tables in database.
+python3 install.py
+
+it will print 'All Tables Created SuccessFully', if file runs successfully.
+
+Endpoints:-
+-->There are 6 endpoints in the project.
+1:- add_hall
+2:- add_professor
+3:- get_hall_available
+4:- add_hall_available
+5:- update_hall_available
+6:- get_hall_data
+
+headers-->
+{'Content-type':'application/json'}
+
+session_key:-
+-->a session key saved in config.json file, for all api operations
+
+1:- add_hall
+-->This api endpoint is to add hall in the database. 
+method: POST
+data = {
+    'name':'G',
+    'capacity':500,
+    'session_key':'12345'
+    })
+-->data will be of json type
+
+name-->name of the hall(string)
+capacity --> capacity of the hall (integer)
+
+response-->
+{'response': {'id_hall': 100}, 'status': True}
+
+2:- add_professor
+-->This api endpoint is to add professor in the database.
+method: POST
+
+data = {
+    'name':'Deepak',
+    'session_key':'12345'
+    })
+-->data will be of json type
+
+name-->name of the professor(string)
+response-->
+{'response': {'id_professor': 100}, 'status': True}
+
+
+3:- get_hall_available
+-->This api end is to get available hall by capacity.
+method:GET
+
+data = {
+    'capacity':300,
+    'time_start':'2021-04-17 09:00:00',
+    'session_key':'12345'
+    })
+-->data will be of json type
+
+name-->capacity of the class(integer)
+time_start -->timestamp value of the time in which professor wants to conduct class.
+response-->
+{'response': {'hall_name': 'F', 'id_hall': 118}, 'status': True}
+
+
+4:- add_hall_available
+-->This api endpoint is to book hall.
+method:POST
+
+data = json.dumps({
+      'id_hall':100,
+      'id_professor':100,
+      'time_start':'2021-04-19 11:00:00',
+      'time_end':'2021-04-19 12:00:00',
+      'session_key':'12345'
+ })
+-->data will be of json type
+
+    id_hall-->id of hall(integer)
+    id_professor-->id of professor(integer)
+    time_start -->timestamp value of the time in which professor wants to conduct class(time stamp).
+    time_end -->timestamp value of the time in which professor wants to end class(time stamp).
+response-->
+    {'response': {'id_hall_available': 100}, 'status': True}
+
+5:-update_hall_available
+    -->This api endpoint is to update hall status, means if a professor wants to end the class then professor needs to execute this end point.
+
+method:PUT
+data = json.dumps({
+    'id_hall_available':101,
+    'state':False,
+    'session_key':'12345'
+})
+-->data will be of json type
+id_hall_available --> id of hall_available which professor wants to close
+state -->boolean field to start and close the class
+response--> {'response': 'Hall Available State Has Updated', 'status': True}
+
+6:- get_hall_data
+-->This api end point is to get hall data by start time and end time.
+
+method:GET
+
+ data = json.dumps({
+    'time_start':'2021-04-17 09:00:00',
+    'time_end':'2021-04-19 13:00:00',
+    'session_key':'12345'
+})
+
+-->data will be of json type
+time_start --> start time(timestamp)
+time_end --> end time(timestamp)
+
+response-->
+{'response': [{'id_hall': 113, 'id_hall_available': 101, 'id_professor': 109, 'state': 0, 'time_end': 'Sat, 17 Apr 2021 10:00:00 GMT', 'time_start': 'Sat, 17 Apr 2021 09:00:00 GMT'}, {'id_hall': 113, 'id_hall_available': 102, 'id_professor': 109, 'state': 1, 'time_end': 'Sat, 17 Apr 2021 12:00:00 GMT', 'time_start': 'Sat, 17 Apr 2021 10:00:00 GMT'}, {'id_hall': 113, 'id_hall_available': 103, 'id_professor': 109, 'state': 1, 'time_end': 'Sun, 18 Apr 2021 11:00:00 GMT', 'time_start': 'Sun, 18 Apr 2021 10:00:00 GMT'}, {'id_hall': 114, 'id_hall_available': 104, 'id_professor': 112, 'state': 1, 'time_end': 'Mon, 19 Apr 2021 12:00:00 GMT', 'time_start': 'Mon, 19 Apr 2021 11:00:00 GMT'}], 'status': True}
+
+Note:- all the parameters should be exactly as given because i have not implemented every case in the api.

@@ -1,0 +1,9 @@
+{
+    "database":{
+        "host":"localhost",
+        "user":"root",
+        "password":"root",
+        "database":"py_assignment"
+    },
+    "session_key":"12345"
+}
